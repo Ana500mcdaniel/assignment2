@@ -10,37 +10,37 @@ print(str(dodgers))  # check the structure of the data frame    ## STUDENT COMME
 # define an ordered day-of-week variable 
 # for plots and data summaries
 dodgers$ordered_day_of_week <- with(data=dodgers,       ## STUDENT COMMENT ## ==> using the data from dodgers' DF and manipulating it using the conditional ifelse function
-  ifelse ((day_of_week == "Monday"),1,                  ## STUDENT COMMENT ## ==> 
+  ifelse ((day_of_week == "Monday"),1,                  ## STUDENT COMMENT ## ==> assigning numerical values to categorical variables i.e day_of_week (dummy variable concept)
   ifelse ((day_of_week == "Tuesday"),2,
   ifelse ((day_of_week == "Wednesday"),3,
   ifelse ((day_of_week == "Thursday"),4,
   ifelse ((day_of_week == "Friday"),5,
   ifelse ((day_of_week == "Saturday"),6,7)))))))
-dodgers$ordered_day_of_week <- factor(dodgers$ordered_day_of_week, levels=1:7,
+dodgers$ordered_day_of_week <- factor(dodgers$ordered_day_of_week, levels=1:7,   ## STUDENT COMMENT ## ==> storing days in the week as vectors of integer
 labels=c("Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"))
 
 # exploratory data analysis with standard graphics: attendance by day of week
-with(data=dodgers,plot(ordered_day_of_week, attend/1000, 
-xlab = "Day of Week", ylab = "Attendance (thousands)", 
+with(data=dodgers,plot(ordered_day_of_week, attend/1000, ## STUDENT COMMENT ## ==> plotting data to visualize x-axis as ordered day of weeks 
+xlab = "Day of Week", ylab = "Attendance (thousands)",  ########################.  labeled as Day of Week, and y as attendence, total attence/1000
 col = "violet", las = 1))
 
 # when do the Dodgers use bobblehead promotions
-with(dodgers, table(bobblehead,ordered_day_of_week)) # bobbleheads on Tuesday
+with(dodgers, table(bobblehead,ordered_day_of_week)) # bobbleheads on Tuesday  ## STUDENT COMMENT ## ==> Creating a new Table with bobblehead and ordered day of the week as rows and colomns
 
 # define an ordered month variable 
 # for plots and data summaries
-dodgers$ordered_month <- with(data=dodgers,
-  ifelse ((month == "APR"),4,
+dodgers$ordered_month <- with(data=dodgers,        ## STUDENT COMMENT ## ==> using the data from dodgers' DF and manipulating it using the conditional ifelse function   
+  ifelse ((month == "APR"),4,                      ## STUDENT COMMENT ## ==> assigning numerical values to categorical variables i.e months (dummy variable concept)
   ifelse ((month == "MAY"),5,
   ifelse ((month == "JUN"),6,
   ifelse ((month == "JUL"),7,
   ifelse ((month == "AUG"),8,
   ifelse ((month == "SEP"),9,10)))))))
-dodgers$ordered_month <- factor(dodgers$ordered_month, levels=4:10,
+dodgers$ordered_month <- factor(dodgers$ordered_month, levels=4:10,  ## STUDENT COMMENT ## ==> Storing months as vector of integers in orderly format
 labels = c("April", "May", "June", "July", "Aug", "Sept", "Oct"))
 
 # exploratory data analysis with standard R graphics: attendance by month 
-with(data=dodgers,plot(ordered_month,attend/1000, xlab = "Month", 
+with(data=dodgers,plot(ordered_month,attend/1000, xlab = "Month",  ## STUDENT COMMENT ## ==> plotting data to visualize x-axis as ordered month y-axis, attendence
 ylab = "Attendance (thousands)", col = "light blue", las = 1))
 
 # exploratory data analysis displaying many variables
@@ -48,10 +48,10 @@ ylab = "Attendance (thousands)", col = "light blue", las = 1))
 # the skies and whether or not fireworks are displayed
 library(lattice) # used for plotting 
 # let us prepare a graphical summary of the dodgers data
-group.labels <- c("No Fireworks","Fireworks")
-group.symbols <- c(21,24)
-group.colors <- c("black","black") 
-group.fill <- c("black","red")
+group.labels <- c("No Fireworks","Fireworks")         ## STUDENT COMMENT ## ==> using c function to combine 2 variables (labels) in a vector 
+group.symbols <- c(21,24)                             ## STUDENT COMMENT ## ==> using c function to combine 2 variables (symbols) in a vector 
+group.colors <- c("black","black")                    ## STUDENT COMMENT ## ==> using c function to combine 2 variables (colors) in a vector 
+group.fill <- c("black","red")                        ## STUDENT COMMENT ## ==> using c function to combine 2 variables (fill) in a vector 
 xyplot(attend/1000 ~ temp | skies + day_night, 
     data = dodgers, groups = fireworks, pch = group.symbols, 
     aspect = 1, cex = 1.5, col = group.colors, fill = group.fill,
