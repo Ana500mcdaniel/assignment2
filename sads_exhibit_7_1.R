@@ -1,16 +1,16 @@
 # Predictive Model for Los Angeles Dodgers Promotion and Attendance (R)
 
-library(car)  # special functions for linear regression
-library(lattice)  # graphics package
+library(car)  # special functions for linear regression.        ## STUDENT COMMENT ##==> 
+library(lattice)  # graphics package       ## STUDENT COMMENT ## ==> High level data visualization tool with features to visualize data even in various non standard needs
 
-# read in data and create a data frame called dodgers
-dodgers <- read.csv("dodgers.csv")
-print(str(dodgers))  # check the structure of the data frame
+# read in data and create a data frame called dodgers.     ## STUDENT COMMENT ## ==> Typically first 6 rows are visible 
+dodgers <- read.csv("dodgers.csv")    ## STUDENT COMMENT ## ==>  read.csv(...), reading csv as a dataframe and assigning it to a variable
+print(str(dodgers))  # check the structure of the data frame    ## STUDENT COMMENT ## ==> str is used to display structure of the data frame (DF) and print is used to share the output in console
 
 # define an ordered day-of-week variable 
 # for plots and data summaries
-dodgers$ordered_day_of_week <- with(data=dodgers,
-  ifelse ((day_of_week == "Monday"),1,
+dodgers$ordered_day_of_week <- with(data=dodgers,       ## STUDENT COMMENT ## ==> using the data from dodgers' DF and manipulating it using the conditional ifelse function
+  ifelse ((day_of_week == "Monday"),1,                  ## STUDENT COMMENT ## ==> 
   ifelse ((day_of_week == "Tuesday"),2,
   ifelse ((day_of_week == "Wednesday"),3,
   ifelse ((day_of_week == "Thursday"),4,
