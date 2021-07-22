@@ -109,12 +109,20 @@ print(str(dodgers.test)) # check test data frame            ## STUDENT COMMENT #
 #.                              2. Generating a fitted model
 
 # specify a simple model with bobblehead entered last
-my.model <- {attend ~ ordered_month + ordered_day_of_week + bobblehead} ## STUDENT COMMENT ## Defined a simple model equation
+
+## STUDENT COMMENT ## Defined a simple model equation with "attendance" as dependent variable and month, day-of-week, and bobblehead distribution as independent
+
+my.model <- {attend ~ ordered_month + ordered_day_of_week + bobblehead} 
 # fit the model to the training set
+
+## STUDENT COMMENT ## Using lm function to fit a linear model
 train.model.fit <- lm(my.model, data = dodgers.train)
 # summary of model fit to the training set
 print(summary(train.model.fit))
 # training set predictions from the model fit to the training set
+
+## STUDENT COMMENT ## predict is a method specifically for lm function predictions. Here it uses the model generated from the training dataset to make predictions
+## about testing data before we compare the results.
 dodgers.train$predict_attend <- predict(train.model.fit) 
 # test set predictions from the model fit to the training set
 dodgers.test$predict_attend <- predict(train.model.fit, 
@@ -122,18 +130,19 @@ dodgers.test$predict_attend <- predict(train.model.fit,
 
 # compute the proportion of response variance
 # accounted for when predicting out-of-sample
+## STUDENT COMMENT ## calculating the proportion of response variance from test data and prediction
 cat("\n","Proportion of Test Set Variance Accounted for: ",
 round((with(dodgers.test,cor(attend,predict_attend)^2)),
   digits=3),"\n",sep="")
 # merge the training and test sets for plotting
-dodgers.plotting.frame <- rbind(dodgers.train,dodgers.test)
+dodgers.plotting.frame <- rbind(dodgers.train,dodgers.test) ## STUDENT COMMENT ## Using rbind to merge training and test data
 
 # generate predictive modeling visual for management
-group.labels <- c("No Bobbleheads","Bobbleheads")
-group.symbols <- c(21,24)
-group.colors <- c("black","black") 
-group.fill <- c("black","red")  
-xyplot(predict_attend/1000 ~ attend/1000 | training_test, 
+group.labels <- c("No Bobbleheads","Bobbleheads")   ## ## STUDENT COMMENT ## grouping labels to see the predicted effect bobbleheads on attendence w.r.t no bobbleheads
+group.symbols <- c(21,24) ## STUDENT COMMENT ## combining pch symbole of points
+group.colors <- c("black","black") ## STUDENT COMMENT ## grouping colors 
+group.fill <- c("black","red")  ## STUDENT COMMENT ## grouping fills
+xyplot(predict_attend/1000 ~ attend/1000 | training_test,  ## STUDENT COMMENT ## plotting scatterplot of predicted attendence with bobblehead
        data = dodgers.plotting.frame, groups = bobblehead, cex = 2,
        pch = group.symbols, col = group.colors, fill = group.fill, 
        layout = c(2, 1), xlim = c(20,65), ylim = c(20,65), 
@@ -143,8 +152,8 @@ xyplot(predict_attend/1000 ~ attend/1000 | training_test,
              panel.segments(25,25,60,60,col="black",cex=2)
             },
        strip=function(...) strip.default(..., style=1),
-       xlab = "Actual Attendance (thousands)", 
-       ylab = "Predicted Attendance (thousands)",
+       xlab = "Actual Attendance (thousands)",         ## STUDENT COMMENT ## labeling x axis
+       ylab = "Predicted Attendance (thousands)",       ## STUDENT COMMENT ## labeling y axis
        key = list(space = "top", 
               text = list(rev(group.labels),col = rev(group.colors)),
               points = list(pch = rev(group.symbols), 
@@ -152,7 +161,7 @@ xyplot(predict_attend/1000 ~ attend/1000 | training_test,
               fill = rev(group.fill))))                   
 # use the full data set to obtain an estimate of the increase in
 # attendance due to bobbleheads, controlling for other factors 
-my.model.fit <- lm(my.model, data = dodgers)  # use all available data
+my.model.fit <- lm(my.model, data = dodgers)  # use all available data.   ## STUDENT COMMENT ## Using the model on the entire dataset of 2012 to predict the attendence
 print(summary(my.model.fit))
 # tests statistical significance of the bobblehead promotion
 # type I anova computes sums of squares for sequential tests
