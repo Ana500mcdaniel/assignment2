@@ -1,11 +1,13 @@
 # Predictive Model for Los Angeles Dodgers Promotion and Attendance (R)
 
 ######### STUDENT'S SUMMARIZATION ##################
-#.  1. Load the data and store it in a data frame
+#.  1. Load the data 
 #   2. Understand the overall structure of the data, data type, colomns, rows etc.
 #.  3. Data Dummification, cleaning --- transformation process. 
 #.  4. Data visualization
 #.  5. Model training and testing
+#.  6. Predicting the outcome using model 
+#.  7. Presenting to the board
 
 library(car)  # special functions for linear regression.        ## STUDENT COMMENT ## Imported CAR for regression modeling
 library(lattice)  # graphics package       ## STUDENT COMMENT ## Imported lattics, a high level data visualization tool with features to visualize 
